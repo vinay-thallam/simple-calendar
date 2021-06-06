@@ -25,25 +25,27 @@ export const groupOverlappingEvents = (
   events: Array<Event>,
 ): Array<Array<Event>> =>
   // @ts-expect-error: when events array is empty, events.shift() returns undefined
-  events.reduce(
-    (eventGroups, event) => {
-      const previousGroup = eventGroups[eventGroups.length - 1]
-      const previousEvent = previousGroup[previousGroup.length - 1]
+  events.length
+    ? events.reduce(
+        (eventGroups, event) => {
+          const previousGroup = eventGroups[eventGroups.length - 1]
+          const previousEvent = previousGroup[previousGroup.length - 1]
 
-      if (previousEvent) {
-        const eventHours = event.toHour - event.fromHour
-        const diff = previousEvent.toHour - event.fromHour
-        if (diff > 0) {
-          previousGroup.push({
-            ...event,
-            overlapHours:
-              event.toHour < previousEvent.toHour ? eventHours : diff,
-          })
-        } else {
-          eventGroups.push([event])
-        }
-      }
-      return eventGroups
-    },
-    [[events.shift()]],
-  )
+          if (previousEvent) {
+            const eventHours = event.toHour - event.fromHour
+            const diff = previousEvent.toHour - event.fromHour
+            if (diff > 0) {
+              previousGroup.push({
+                ...event,
+                overlapHours:
+                  event.toHour < previousEvent.toHour ? eventHours : diff,
+              })
+            } else {
+              eventGroups.push([event])
+            }
+          }
+          return eventGroups
+        },
+        [[events.shift()]],
+      )
+    : []

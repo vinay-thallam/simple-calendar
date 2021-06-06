@@ -43,7 +43,13 @@ export const Event: FC<EventProps> = ({ event, groupIndex }) => {
   }
 
   return (
-    <div className="event" style={eventStyles}>
+    <div
+      className="event"
+      style={eventStyles}
+      onClick={() => {
+        deleteEvent(event.id)
+      }}
+    >
       {event.overlapHours ? (
         <div className="overlap-portion" style={overlapPortionStyles}>
           <EventDetail event={event} />

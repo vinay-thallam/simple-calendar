@@ -24,15 +24,17 @@ export const EventGroupsProvider: FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (events.length) {
-      const eventGroups = groupOverlappingEvents(events)
-      setEventGroups(eventGroups)
-    }
+    const eventGroups = groupOverlappingEvents([...events])
+    setEventGroups(eventGroups)
   }, [events])
 
   const deleteEvent = (id: number) => {
-    events.slice(id, 1)
-    setEvents(events)
+    const eventsArr = [...events]
+    eventsArr.splice(
+      eventsArr.findIndex((ev) => ev.id === id),
+      1,
+    )
+    setEvents(eventsArr)
   }
 
   return (
