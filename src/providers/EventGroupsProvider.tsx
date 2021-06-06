@@ -24,8 +24,10 @@ export const EventGroupsProvider: FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    const eventGroups = groupOverlappingEvents(events)
-    setEventGroups(eventGroups)
+    if (events.length) {
+      const eventGroups = groupOverlappingEvents(events)
+      setEventGroups(eventGroups)
+    }
   }, [events])
 
   const deleteEvent = (id: number) => {

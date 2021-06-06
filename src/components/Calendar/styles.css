@@ -31,9 +31,45 @@
 
 .hour-rules {
   flex-grow: 1;
+  border-left: 1px solid #70757a;
 }
 
 .hour-rule {
   height: 40px;
   border-top: 1px solid #70757a;
+  position: relative;
+  left: -6px;
+}
+
+.events-container {
+  position: absolute;
+  top: 66px;
+  left: 58px;
+  width: calc(100% - 72px);
+}
+.event {
+  position: absolute;
+  background-color: rgb(198, 218, 252);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.event:hover {
+  box-shadow: -2px 2px 11px 0px rgba(102, 69, 69, 0.83);
+  -webkit-box-shadow: -2px 2px 11px 0px rgba(102, 69, 69, 0.83);
+  -moz-box-shadow: -2px 2px 11px 0px rgba(102, 69, 69, 0.83);
+}
+
+.overlap-portion {
+  background-color: red;
+  position: absolute;
+  top: 0;
+  border-radius: 2px;
+}
+
+.event-title {
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 5px;
+  margin-left: 5px;
 }
