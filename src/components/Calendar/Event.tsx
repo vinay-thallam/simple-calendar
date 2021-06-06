@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { FC, CSSProperties } from 'react'
+import React, { useState, useEffect, FC, CSSProperties } from 'react'
 import { useEventGroups } from 'providers/EventGroupsProvider'
 import { convertTo12HrFormat } from './utils'
 import { Event as EventT } from 'types'
@@ -15,17 +15,31 @@ export const Event: FC<EventProps> = ({ event, groupIndex }) => {
   const { deleteEvent } = useEventGroups()
   const eventDuration = event.toHour - event.fromHour
 
+  const [windowWidth, setWindowWidth] = useState<number>(
+    () => window.innerWidth,
+  )
+
+  useEffect(() => {
+    const onResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
   const eventStyles: CSSProperties = {
     border: event.overlapHours ? '1px solid white' : 'none',
     height: HOUR_SIZE * eventDuration - 2,
-    width: window.innerWidth - (72 + 100 * groupIndex),
+    width: windowWidth - (72 + 70 * groupIndex),
     top: HOUR_SIZE * (event.fromHour - 9),
-    left: 100 * groupIndex,
+    left: 70 * groupIndex,
   }
 
   const overlapPortionStyles: CSSProperties = {
     height: event.overlapHours ? HOUR_SIZE * event.overlapHours - 4 : 0,
-    width: window.innerWidth - (74 + 100 * groupIndex),
+    width: windowWidth - (74 + 70 * groupIndex),
   }
 
   return (
