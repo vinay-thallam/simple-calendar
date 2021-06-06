@@ -23,7 +23,8 @@
     "eject": "react-scripts eject",
     "lint": "concurrently --kill-others-on-fail yarn:eslint yarn:prettier",
     "eslint": "eslint --max-warnings=0 --ext .js,.jsx,.ts,.tsx .",
-    "prettier": "prettier --check '*.{js,jsx,json,md,scss,ts,tsx,yaml}'"
+    "prettier": "prettier --check '*.{js,jsx,json,md,scss,ts,tsx,yaml}'",
+    "tsc": "./node_modules/.bin/tsc"
   },
   "eslintConfig": {
     "extends": [
