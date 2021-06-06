@@ -1,7 +1,10 @@
-import { TimeInterval, Event } from 'types'
+import { TimeInterval, Event, Hour } from 'types'
 
 export const range = (start: number, end: number): Array<number> =>
   [...Array(end - start)].map((_, i) => i + start)
+
+export const convertTo12HrFormat = (hour: Hour): string =>
+  `${hour % 12 || 12} ${hour >= 12 ? 'PM' : 'AM'}`
 
 export const prepareEvents = (
   timeIntervals: Array<TimeInterval>,
@@ -21,7 +24,7 @@ export const prepareEvents = (
 export const groupOverlappingEvents = (
   events: Array<Event>,
 ): Array<Array<Event>> =>
-  // @ts-expect-error
+  // @ts-expect-error: when events array is empty, events.shift() returns undefined
   events.reduce(
     (eventGroups, event) => {
       const previousGroup = eventGroups[eventGroups.length - 1]
