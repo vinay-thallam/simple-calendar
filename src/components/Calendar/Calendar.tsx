@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { DayView } from './DayView'
+import { EventGroup } from './EventGroup'
 import './styles.css'
 
 export const Calendar: FC = () => (

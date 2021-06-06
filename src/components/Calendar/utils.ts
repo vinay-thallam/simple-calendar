@@ -9,16 +9,16 @@ export const convertTo12HrFormat = (hour: Hour): string =>
 export const prepareEvents = (
   timeIntervals: Array<TimeInterval>,
 ): Array<Event> => {
-  const events = timeIntervals.map((timeInterval, index) => ({
-    ...timeInterval,
-    id: index,
-  }))
-
-  return events.sort((event1, event2) => {
-    const fromHourDiff = event1.fromHour - event2.fromHour
-    const toHourDiff = event2.toHour - event1.toHour
-    return fromHourDiff === 0 ? toHourDiff : fromHourDiff
-  })
+  return timeIntervals
+    .sort((timeInterval1, timeInterval2) => {
+      const fromHourDiff = timeInterval1.fromHour - timeInterval2.fromHour
+      const toHourDiff = timeInterval2.toHour - timeInterval1.toHour
+      return fromHourDiff === 0 ? toHourDiff : fromHourDiff
+    })
+    .map((timeInterval, index) => ({
+      ...timeInterval,
+      id: index,
+    }))
 }
 
 export const groupOverlappingEvents = (
